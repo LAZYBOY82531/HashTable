@@ -20,14 +20,17 @@ namespace HashTable
 			public TValue value;
 		}
 
-		private Func<TKey, int> hashFunc;           //인덱스 값
 		private Entry[] table;                              //해쉬태이블 정의
+		public MyHashTable()
+        {
+			table = new Entry[DefaultCapacity];
+        }
 
 		public TValue this[TKey key]                    //키를 사용해 값을 받는 행위
 		{
 			get
 			{
-				int index = Math.Abs(hashFunc(key)) % table.Length;   //키를 받아 인덱스로 해싱
+				int index = Math.Abs(key.GetHashCode()) % table.Length;   //키를 받아 인덱스로 해싱
 				while (table[index].state == Entry.State.Using)
 				{
 					if (key.Equals(table[index].key))        					//동일한 키 값을 찾았을때 반환하기
@@ -45,7 +48,7 @@ namespace HashTable
 			set
 			{
 				// key를 인덱스로 해싱
-				int index = Math.Abs(hashFunc(key)) % table.Length;
+				int index = Math.Abs(key.GetHashCode()) % table.Length;
 				while (table[index].state == Entry.State.Using)
 				{
 					if (key.Equals(table[index].key))
@@ -62,8 +65,8 @@ namespace HashTable
 		public void Add(TKey key, TValue value)
 		{
 			//1, key를 index로 해싱
-			int hashCode = hashFunc(key);
-			int index = Math.Abs(hashCode) % table.Length;
+			int hashCode = key.GetHashCode();
+			int index = Math.Abs(key.GetHashCode()) % table.Length;
 			//자리를 계속 찾는 반복문
 			while (table[index].state == Entry.State.Using)
 			{
@@ -86,7 +89,7 @@ namespace HashTable
 
 		public void Remove(TKey key)                                             //키를받아 키안의 값을 삭제하는 함수
 		{
-			int index = Math.Abs(hashFunc(key)) % table.Length;
+			int index = Math.Abs(key.GetHashCode()) % table.Length;
 			while (table[index].state == Entry.State.Using)
 			{
 				if (key.Equals(table[index].key))                          //값을 찾으면
