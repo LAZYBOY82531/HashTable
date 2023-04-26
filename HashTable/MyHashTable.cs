@@ -33,8 +33,11 @@ namespace HashTable
 					if (key.Equals(table[index].key))        					//동일한 키 값을 찾았을때 반환하기
 					{
 						return table[index].value;
-						break;                                                             //반환하고 반복종료
 					}
+					if (table[index].state != Entry.State.Using)
+                    {
+						break;
+                    }
 					index = index < table.Length - 1 ? index + 1 : 0;     //인덱스 값에 1씩 더하며 계속 반복
 				}
 				throw new InvalidOperationException();              //예외발생경우
@@ -56,7 +59,7 @@ namespace HashTable
 			}
 		}
 
-		private void Add(TKey key, TValue value)
+		public void Add(TKey key, TValue value)
 		{
 			//1, key를 index로 해싱
 			int hashCode = hashFunc(key);
@@ -89,7 +92,7 @@ namespace HashTable
 				if (key.Equals(table[index].key))                          //값을 찾으면
 				{
 					table[index].value = default;                            //값을 기본값으로 덮어쓴다
-					table[index].state = Entry.State.Deleted;       //값상태를 deleted로 저장한다
+					table[index].state = Entry.State.Deleted;       //값상태를 delete 로 저장
 					break;
 				}
 				if (index < table.Length - 1)

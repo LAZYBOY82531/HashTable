@@ -66,46 +66,22 @@
 				Console.WriteLine("딕셔너리에 초기아이템이 있음");
 			else
 				Console.WriteLine("딕셔너리에 초기아이템이 없음");
-
+			/*
 			string output;
 
 			if (dictionary.TryGetValue("bmp", out output))
 				Console.WriteLine(output);
 			else
-				Console.WriteLine("bmp 키 값의 데이터가 없음");
+				Console.WriteLine("bmp 키 값의 데이터가 없음");*/
 		}
 
 		static void Main(string[] args)
 		{
-			/*DataStructure.Dictionary<string, string> hashTable = new DataStructure.Dictionary<string, string>();
-
-			hashTable.Add("txt", "텍스트 파일");
-			hashTable.Add("bmp", "이미지 파일");
-			hashTable.Add("mp3", "오디오 파일");
-
-			Console.WriteLine(hashTable["txt"]);       // 키값은 인덱서를 통해 접근
-
-			if (hashTable.ContainsKey("mp3"))
-				Console.WriteLine("mp3 키 값의 데이터가 있음");
-			else
-				Console.WriteLine("mp3 키 값의 데이터가 없음");
-
-			if (hashTable.Remove("mp3"))
-				Console.WriteLine("mp3 키 값에 해당하는 데이터를 지움");
-			else
-				Console.WriteLine("mp3 키 값에 해당하는 데이터를 못지움");
-
-			if (hashTable.ContainsKey("mp3"))
-				Console.WriteLine("mp3 키 값의 데이터가 있음");
-			else
-				Console.WriteLine("mp3 키 값의 데이터가 없음");
-
-			string output;
-			if (hashTable.TryGetValue("bmp", out output))
-				Console.WriteLine(output);
-			else
-				Console.WriteLine("bmp 키 값의 데이터가 없음");*/
-
+			HashTable.MyHashTable<string, string> me = new HashTable.MyHashTable<string, string>();
+			me.Add("붕괴", "키아나");
+			me.Add("원신", "루미네");
+			me.Add("스타레일", "누군가");
+			Console.WriteLine(me["스타레일"]);
 
 		}
 		public class Item
