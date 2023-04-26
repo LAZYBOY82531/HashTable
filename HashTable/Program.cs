@@ -106,6 +106,7 @@
 			else
 				Console.WriteLine("bmp 키 값의 데이터가 없음");*/
 
+
 		}
 		public class Item
 		{
